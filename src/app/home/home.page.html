@@ -1,20 +1,37 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-app>
+  <ion-content fullscreen class="ion-padding" scroll-y="false">
+    <ion-slides>
+      <ion-slide>
+        <div class="slide">
+          <img src="../assets/images/chat.png" alt="Hi" />
+          <h2>Bienvenido!</h2>
+          <p>
+            Te damos la bienvenida a nuestra aplicacion para control de asisitencias para alumnos o gestion para profesores.
+          </p>
+        </div>
+      </ion-slide>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+      <ion-slide>
+        <img src="../assets/images/qr-code.png" alt="Cash" />
+        <h2>En que no basamos?</h2>
+        <p>
+          Nos dedicamos al <b>control de asistencias a clases para el alumno, y registro para los profesores</b>. Escanea el codigo QR de cada clase para dar la asistencia a laa misma!
+        </p>
+      </ion-slide>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
-</ion-content>
+      <ion-slide>
+        <img src="../assets/images/training.png" alt="Privacy" />
+        <h2>Para quien esta destinada?</h2>
+        <p>
+          Esta destinada para los alumnos y ¡tambien a los profesores!. Totalmente <b>gratis</b> y con total <b>privacidad y resguardo de datos</b>.
+        </p>
+      </ion-slide>
+
+      <ion-slide>
+        <img src="../assets/images/go.png" alt="Money" />
+        <h2>Comenzamos?</h2>
+        <ion-button fill="clear" routerLink="/login" >Continuar <ion-icon slot="end" name="arrow-forward"></ion-icon></ion-button>
+      </ion-slide>
+    </ion-slides>
+  </ion-content>
+</ion-app>
