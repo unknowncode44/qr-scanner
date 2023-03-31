@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { QrScannerService } from '../services/qr-scanner.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,15 +11,18 @@ export class DashboardPage implements OnInit {
 
   token!: string
 
-  constructor() { }
+  constructor(private api: QrScannerService, private router: Router) { }
 
   ngOnInit() {
-    if(localStorage.getItem('token') !== undefined){
-      this.token = localStorage.getItem('token')!.toString() //! EL LOCAL STORAGE GUARDA A PESAR DE RECARGAR
-    }
-    else {
-      this.token = "no hay token"
-    }
+    this.getUser
+  }
+
+  //* Obtenemos los datos y manejamos los errores
+  getUser() {
+    this.api.getUsers().subscribe({
+      next: data => { console.log(data) },
+      error: err => { console.log(err.error.msg, err.statusText, err.ok) }
+    })
   }
 
 }

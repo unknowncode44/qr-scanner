@@ -14,6 +14,12 @@ export class QrScannerService {
 
   constructor(private http: HttpClient) { }
 
+  //! TESTING
+  getUsers(): Observable<any> {
+    let direction: string = this.url + 'users'
+    return this.http.get<any>(direction).pipe(catchError(this.handleError))
+  }
+
   //! Login service
   login(form: Login): Observable<any> {
     let direction: string = this.url + 'auth/login'

@@ -4,6 +4,7 @@ import { OverlayEventDetail } from '@ionic/core/components';
 import { Router } from '@angular/router';
 import { Login } from '../models/login.interface';
 import { QrScannerService } from '../services/qr-scanner.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,7 @@ export class LoginPage implements OnInit {
   message = 'This modal example uses triggers to automatically open a modal when the button is clicked.';
   name!: string;
 
-  constructor(private api: QrScannerService, private router: Router) { }
+  constructor(private api: QrScannerService, private router: Router, private cookieService: CookieService) { }
 
   ngOnInit() {
   }
@@ -52,7 +53,7 @@ export class LoginPage implements OnInit {
     this.api.login(form).subscribe({
       next: data => {
         console.log(data.token)
-        localStorage.setItem('token', data.token)
+        this.cookieService.set('x-token', data.token) //* Guardamos el token en las cookies
         this.router.navigate(['/dashboard'])
       },
       error: error => { console.log(error.error.msg) }
