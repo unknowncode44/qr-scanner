@@ -1,41 +1,36 @@
-<ion-header>
-
-</ion-header>
-
 <ion-content class="ion-padding">
   <ion-list style="margin-top: 60px; text-align: center">
     <img src="../assets/images/login.png" alt="Login" height="60px" width="60px">
     <h1>LOGIN</h1>
   </ion-list>
 
-  <ion-grid>
-    <ion-row>
-      <ion-item fill="outline">
-        <ion-label position="floating">User</ion-label>
-        <ion-input [clearInput]="true" placeholder="User name or email"></ion-input>
-      </ion-item>
-    </ion-row>
+    <ion-grid>
+      <ion-row>
+        <ion-item fill="outline">
+          <ion-label position="floating">User</ion-label>
+          <ion-input [clearInput]="true" #username type="text" placeholder="User name or email"></ion-input>
+        </ion-item>
+      </ion-row>
 
-    <ion-row style="margin-top: 20px;">
-      <ion-item fill="outline">
-        <ion-label position="floating">Password</ion-label>
+      <ion-row style="margin-top: 20px;">
+        <ion-item fill="outline">
+          <ion-label position="floating">Password</ion-label>
 
-        <!-- Hide - Show icon button (view the component) -->
-        <app-hide-show>
-          <ion-input placeholder="Password" type="password"></ion-input>
-        </app-hide-show>
+          <!-- Hide - Show icon button (view the component) -->
+          <app-hide-show>
+            <ion-input placeholder="Password" #pass type="password"></ion-input>
+          </app-hide-show>
 
-      </ion-item>
-    </ion-row>
+        </ion-item>
+      </ion-row>
 
-    <ion-row style="margin-top: 20px;">
-      <!-- Open modal to register form -->
-      <ion-col size="auto"><a style="color: gray">Forgot password?</a></ion-col>
-      <ion-col style="text-align: end;"><a id="open-modal">Sign up!</a></ion-col>
+      <ion-row style="margin-top: 20px;">
+        <!-- Open modal to register form -->
+        <ion-col size="auto"><a style="color: gray" (click)="login()">Forgot password?</a></ion-col>
+        <ion-col style="text-align: end;"><a id="open-modal">Sign up!</a></ion-col>
 
-    </ion-row>
-  </ion-grid>
-
+      </ion-row>
+    </ion-grid>
 </ion-content>
 <!-- Modal to register a new account -->
 <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
