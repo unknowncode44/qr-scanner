@@ -87,7 +87,12 @@ export class LoginPage implements OnInit {
         this.cookieService.set('x-token', data.token) //* Guardamos el token en las cookies
         
         // TODO: Matias: CREAR UN SWITCH CASE DEPENDIENDO EL ROL DEL USUARIO
-        this.router.navigate(['/dashboard'])
+        if(this.user.role === "ALUMNO"){
+          this.router.navigate(['/dashboard'])
+        }
+        else {
+          this.router.navigate(['/teacher-dashboard'])
+        }
       },
       error: error => { console.log(error.error.msg) }
     })
