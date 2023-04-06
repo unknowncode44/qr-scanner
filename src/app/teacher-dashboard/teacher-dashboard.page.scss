@@ -58,15 +58,21 @@ ion-content {
                 align-items: center;
             }
         }
-        ion-item:hover {
-            --background: rgba(255, 255, 255, .2);
-        }
-        ion-label {
-            padding: 0px 10px;
+        .hv-devs-mark {
+            margin-top: 18rem;
             width: 100%;
             text-align: center;
-            font-weight: 300;
-            font-size: 14px;
+            ion-label {
+                padding: 0px 10px;
+                width: 100%;
+                text-align: center;
+                font-weight: 300;
+                font-size: 14px;
+            }
         }
     }
+}
+
+.active-item {
+    --background: rgba(255, 255, 255, .2);
 }

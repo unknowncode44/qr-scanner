@@ -11,9 +11,15 @@ const routes: Routes = [
       {
         path: 'qr-screen',
         loadChildren: () => import('./qr-screen/qr-screen.module').then( m => m.QrScreenPageModule)
-      }
+      },
+      {
+        path: 'teacher-home',
+        loadChildren: () => import('./teacher-home/teacher-home.module').then( m => m.TeacherHomePageModule)
+      },
     ]
   },
+ 
+  
   
 ];
 

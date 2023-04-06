@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { StorageService } from '../services/storage.service';
 import { User } from '../models/user.interface';
 import { MenuController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-teacher-dashboard',
@@ -30,28 +31,29 @@ export class TeacherDashboardPage implements OnInit {
     {
       title: "Inicio",
       icon: "home-outline",
-      path: "home"
+      path: "/teacher-dashboard/teacher-home"
     },
     {
       title: "Generar QR",
       icon: "qr-code",
-      path: "qr-screen"
+      path: "/teacher-dashboard/qr-screen"
     },
     {
       title: "Salir",
       icon: "log-out-outline",
-      path: ""
+      path: "/login"
     },
   ]
 
   constructor(
     private storage : StorageService,
-    private menuController: MenuController 
+    private menuController: MenuController,
+    private router: Router 
   ) { }
 
   ngOnInit() {
     this.storage.getUser('user').then(user => {this.user = user})
-    
+    this.router.navigateByUrl('/teacher-dashboard/teacher-home')
   }
 
   async openMenu() {
@@ -59,6 +61,7 @@ export class TeacherDashboardPage implements OnInit {
     this.menuController.isOpen('main').then(value => {
       isOpen = value;
       if(isOpen){
+
         this.menuController.close('main')
       }
       else {
