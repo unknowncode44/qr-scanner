@@ -43,7 +43,7 @@ export const logout = createAction("[Auth] Log Out");
 //LOADING ACTIONS
 export const loading = createAction(
     '[Auth] Loading',
-    
+    props<{ loading: boolean}>()  
 );
 
 

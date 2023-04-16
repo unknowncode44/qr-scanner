@@ -6,8 +6,12 @@ import { DashboardPage } from './dashboard.page';
 const routes: Routes = [
   {
     path: '',
-    component: DashboardPage
-  }
+    component: DashboardPage,
+  },
+  {
+    path: 'subject-progress-page',
+    loadChildren: () => import('../shared-components/subject-progress-page/subject-progress-page.module').then( m => m.SubjectProgressPagePageModule)
+  },
 ];
 
 @NgModule({

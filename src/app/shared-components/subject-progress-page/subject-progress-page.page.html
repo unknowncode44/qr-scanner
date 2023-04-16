@@ -1,0 +1,72 @@
+<ion-header class="ion-no-border">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-button (click)="backToHome()">
+                <ion-icon size="large" slot="start" name="arrow-back" color="light"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" color="custom">
+    <ion-header class="ion-no-border">
+        <ion-toolbar>
+            <div class="title">
+                <h2>{{subject}}</h2>
+            </div>
+            <div class="subtitle">
+                <h4>{{carreer}}</h4>
+            </div>
+
+        </ion-toolbar>
+    </ion-header>
+    <div class="graphic-container">
+        <circle-progress [percent]="percentage" [clockwise]="false" [radius]="70" [outerStrokeWidth]="12" [innerStrokeWidth]="6" [titleColor]="'#fff'" [unitsColor]="'#fff'" [titleFontSize]="'28px'" [unitsFontSize]="'16px'" [outerStrokeColor]="'#fff'" [innerStrokeColor]="'#808080B8'"
+            [animation]="true" [animationDuration]="600" [showSubtitle]="false"></circle-progress>
+    </div>
+    <div class="cards-container">
+        <ion-grid>
+            <ion-row>
+                <ion-col size="12" class="r-title">
+                    Clases
+                </ion-col>
+                <ion-col size="4">
+                    <div class="card-custom">
+                        <p>Totales</p>
+                        <strong>{{total_clases}}</strong>
+                    </div>
+                </ion-col>
+                <ion-col size="4">
+                    <div class="card-custom">
+                        <p>Dictadas</p>
+                        <strong>{{total_d_clases}}</strong>
+                    </div>
+                </ion-col>
+                <ion-col size="4">
+                    <div class="card-custom">
+                        <p>Asistidas</p>
+                        <strong>{{total_a_clases}}</strong>
+                    </div>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
+    <div class="activity-container">
+        <ion-col size="12">
+            Ultima Actividad
+        </ion-col>
+        <div class="inside-a-c">
+            <ion-list class="ion-no-border">
+                <ion-item *ngFor="let act of activity" class="ion-no-border">
+                    <ion-grid fixed>
+                        <ion-row>
+                            <ion-col size="9">{{act.date}}</ion-col>
+                            <ion-col size="3">{{act.hours}} hs</ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-item>
+            </ion-list>
+        </div>
+    </div>
+
+</ion-content>

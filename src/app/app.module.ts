@@ -18,11 +18,13 @@ import { AuthService } from './services/auth.service';
 import { authReducer } from './state/reducers/auth.reducer';
 import { userReducer } from './state/reducers/user.reducer';
 
+
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule, 
-    IonicModule.forRoot(), 
+    IonicModule.forRoot(),
     AppRoutingModule, 
     HttpClientModule, 
     StoreModule.forRoot({auth: authReducer, user: userReducer}), 

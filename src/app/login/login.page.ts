@@ -11,7 +11,7 @@ import { StorageService } from '../services/storage.service';
 import { Store } from '@ngrx/store';
 import { AppState, selectAuthFeature, selectIsLoading } from '../state/app.state';
 import { login } from '../state/actions/auth.actions';
-import { Observable } from 'rxjs';
+import { Observable, switchMap } from 'rxjs';
 import { selectIsLogged } from '../state/app.state';
 
 @Component({
@@ -58,13 +58,15 @@ export class LoginPage implements OnInit {
     private storage       : StorageService,
     private store         : Store<AppState>
     ) {
-      this.store.select(selectIsLoading).subscribe(load => this.loading = load)
+      //this.store.select(selectIsLoading).subscribe(load => this.loading = load)
      }
 
   ngOnInit() {
-    this.store.select(selectIsLoading).subscribe(load => this.loading = load)
-    // this.getState = this.store.select(selectFeaureCredentials)
-    console.warn(this.loading)
+    this.store.select(selectIsLoading).subscribe(
+      (res) => {
+        this.loading = res
+      }
+    )
   }
 
   cancel() {

@@ -19,9 +19,9 @@
 
 <ion-content>
     <div class="slides ion-margin-bottom">
-        <ion-slides [options]="slidesOptions">
+        <ion-slides *ngIf="!hideHeader" [options]="slidesOptions">
             <ion-slide *ngFor="let subject of subjects">
-                <ion-card>
+                <ion-card button (click)="seeProgress()">
                     <ion-card-header>
                         <div class="main">
                             <img src="{{subject.img}}" alt="">
@@ -41,7 +41,7 @@
             </ion-button>
         </div>
     </div>
-    <div class="list-cont">
+    <div *ngIf="!hideHeader" class="list-cont">
         <h3>Actividad reciente</h3>
         <ion-item lines="none" *ngFor="let activity of recentActivity">
             <ion-grid>
@@ -62,3 +62,4 @@
     </div>
 
 </ion-content>
+<router-outlet></router-outlet>

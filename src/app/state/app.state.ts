@@ -12,7 +12,7 @@ export interface AppState {
 
 // SELECTORES
 export const selectAuthFeature = createFeatureSelector<auth.AuthState>('auth')
-export const selectUserFeature = (state: AppState) => state.userState
+export const selectUserFeature = createFeatureSelector<user.UserState>('user')
 
 
 // para seleccionar el token del state
@@ -49,5 +49,11 @@ export const selectUser = createSelector(
 export const selectRole = createSelector(
     selectUserFeature,
     (state: user.UserState) => state.role
+)
+
+//para seleccionar el usuario
+export const selectSubjects = createSelector(
+    selectUserFeature,
+    (state: user.UserState) => state.subjects
 )
 

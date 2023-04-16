@@ -16,6 +16,7 @@ const routes: Routes = [
         path: 'teacher-home',
         loadChildren: () => import('./teacher-home/teacher-home.module').then( m => m.TeacherHomePageModule)
       },
+      
     ]
   },
  

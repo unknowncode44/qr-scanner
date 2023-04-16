@@ -1,0 +1,41 @@
+ion-menu {
+    ion-content {
+        --background: rgba(88, 164, 127, 0.9);
+        .menu-header-bg {
+            height: 40px;
+            width: 100%;
+            padding: 0 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            justify-content: center;
+            color: #fff;
+        }
+    }
+    ion-item {
+        --background: rgba(255, 255, 255, .3);
+        --border-radius: 10px;
+        margin: 8px 8px;
+        ion-label {
+            font-family: 'Ubuntu', sans-serif;
+        }
+        ion-col:nth-child(1),
+        ion-col:nth-child(3) {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+    .hv-devs-mark {
+        margin-top: 18rem;
+        width: 100%;
+        text-align: center;
+        ion-label {
+            padding: 0px 10px;
+            width: 100%;
+            text-align: center;
+            font-weight: 300;
+            font-size: 14px;
+        }
+    }
+}

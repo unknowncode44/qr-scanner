@@ -33,6 +33,12 @@ export class UserService {
     return this.http.get(direction).pipe(catchError(this.handleError))
   }
 
+  //? get materias
+  getSubjects(id: string): Observable<any> {
+    let direction = this.url + 'student/materias-info/'+id
+    return this.http.get(direction).pipe(catchError(this.handleError))
+  }
+
   //! Obtener un unico usuario
   getUser(id: string): Observable<any> {
     let direction = this.url + 'users/' + id

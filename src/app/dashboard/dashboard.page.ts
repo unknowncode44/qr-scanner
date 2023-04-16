@@ -4,6 +4,9 @@ import { User } from '../models/user.interface';
 import { Subject } from '../models/subject.interface';
 import { StorageService } from '../services/storage.service';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { selectUser } from '../state/app.state';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,6 +16,7 @@ import { Router } from '@angular/router';
 export class DashboardPage implements OnInit {
 
   token!: string
+  hideHeader: boolean = false
   user: User =  {
     id: 0,
     last_name: "",
@@ -78,18 +82,34 @@ export class DashboardPage implements OnInit {
 
 
   constructor(
-    private api     : AuthService,
-    private storage : StorageService, 
+    private store   : Store,
+    private users   : UserService,
     private router  : Router
     ) { }
 
   ngOnInit() {
-    // this.getUser
-    this.storage.getUser('user').then(user => {this.user = user})
+    this.store.select(selectUser).subscribe(user => {this.user = user!})
+    this.users.getSubjects(this.user.id.toString()).subscribe(materias => {
+      console.warn(materias.result);
+    })
   }
 
   slidesOptions = {
     slidesPerView: 1.3,
+  }
+
+  seeProgress() {
+    if(!this.hideHeader){
+      this.hideHeader = !this.hideHeader
+    }
+    this.router.navigateByUrl('/dashboard/subject-progress-page')
+  }
+
+  seeProgressGoBack() {
+    if(this.hideHeader){
+      this.hideHeader = !this.hideHeader
+    }
+    this.router.navigateByUrl('/dashboard')
   }
 
   // //* Obtenemos los datos y manejamos los errores

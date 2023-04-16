@@ -24,6 +24,10 @@ const routes: Routes = [
   {
     path: 'teacher-dashboard',
     loadChildren: () => import('./teacher-dashboard/teacher-dashboard.module').then( m => m.TeacherDashboardPageModule)
+  },
+  {
+    path: 'subject-progress-page',
+    loadChildren: () => import('./shared-components/subject-progress-page/subject-progress-page.module').then( m => m.SubjectProgressPagePageModule)
   }
 
 ];
