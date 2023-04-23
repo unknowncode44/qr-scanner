@@ -21,7 +21,7 @@
     <div class="slides ion-margin-bottom">
         <ion-slides *ngIf="!hideHeader" [options]="slidesOptions">
             <ion-slide *ngFor="let subject of subjects">
-                <ion-card button (click)="seeProgress()">
+                <ion-card button (click)="seeProgress(subject.id)">
                     <ion-card-header>
                         <div class="main">
                             <img src="{{subject.img}}" alt="">

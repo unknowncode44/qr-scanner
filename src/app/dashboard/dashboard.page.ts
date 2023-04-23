@@ -1,12 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { User } from '../models/user.interface';
-import { Subject } from '../models/subject.interface';
 import { StorageService } from '../services/storage.service';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { selectUser } from '../state/app.state';
+import { selectUser, selectSubjects, selectAttendance } from '../state/app.state';
 import { UserService } from '../services/user.service';
+import { getAttendance } from '../state/actions/user.actions';
+import { Attendance } from '../models/attendance.interface';
+
+interface ShowSubject {
+  id: number,
+  title: string,
+  total_hours: number,
+  img: string,
+  value?: string,
+  percentage?: string
+}
 
 @Component({
   selector: 'app-dashboard',
@@ -15,6 +25,7 @@ import { UserService } from '../services/user.service';
 })
 export class DashboardPage implements OnInit {
 
+  date = new Date()
   token!: string
   hideHeader: boolean = false
   user: User =  {
@@ -33,32 +44,9 @@ export class DashboardPage implements OnInit {
     file_number: "123"
   }
 
-  subjects: Subject[] = [
-    { 
-      id: 1,
-      title: "Laboratorio 1",
-      total_hours: 150,
-      img: "../../assets/images/tubes.png"
-    },
-    { 
-      id: 2,
-      title: "Ingles 1",
-      total_hours: 150,
-      img: "../../assets/images/language.png"
-    },
-    { 
-      id: 3,
-      title: "Programacion 1",
-      total_hours: 150,
-      img: "../../assets/images/code.png"
-    },
-    { 
-      id: 4,
-      title: "Matematica",
-      total_hours: 150,
-      img: "../../assets/images/maths.png"
-    }
-  ]
+  subjects: ShowSubject[] = []
+
+  attendance: Attendance[] = []
 
   recentActivity = [
     {
@@ -73,10 +61,6 @@ export class DashboardPage implements OnInit {
       subj: "Ingles 1",
       time: "00:32"
     },
-    // {
-    //   subj: "Base de Datos",
-    //   time: "01:52"
-    // },
   ]
 
 
@@ -88,9 +72,21 @@ export class DashboardPage implements OnInit {
     ) { }
 
   ngOnInit() {
-    this.store.select(selectUser).subscribe(user => {this.user = user!})
-    this.users.getSubjects(this.user.id.toString()).subscribe(materias => {
-      console.warn(materias.result);
+    let time = new Date()
+    
+    this.store.select(selectUser).subscribe(user => {this.user = user!});
+    this.store.select(selectSubjects).subscribe(subjects => {
+      for (let i = 0; i < subjects.length; i++) {
+        const e = subjects[i];
+        let mat = {
+          id: e!.materia_id,
+          title: e!.materia_name,
+          total_hours:150,
+          img: "../../assets/images/code.png",
+        }
+        this.subjects.push(mat)
+      }
+
     })
   }
 
@@ -98,26 +94,14 @@ export class DashboardPage implements OnInit {
     slidesPerView: 1.3,
   }
 
-  seeProgress() {
-    if(!this.hideHeader){
-      this.hideHeader = !this.hideHeader
-    }
-    this.router.navigateByUrl('/dashboard/subject-progress-page')
+  seeProgress(id_mat: number) {
+    let id_materia = id_mat
+    this.router.navigate(['/dashboard/subject-progress-page', id_materia])
   }
 
   seeProgressGoBack() {
-    if(this.hideHeader){
-      this.hideHeader = !this.hideHeader
-    }
     this.router.navigateByUrl('/dashboard')
   }
 
-  // //* Obtenemos los datos y manejamos los errores
-  // getUser() {
-  //   this.api.getUsers().subscribe({
-  //     next: data => { console.log(data) },
-  //     error: err => { console.log(err.error.msg, err.statusText, err.ok) }
-  //   })
-  // }
 
 }

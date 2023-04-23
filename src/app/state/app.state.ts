@@ -57,3 +57,9 @@ export const selectSubjects = createSelector(
     (state: user.UserState) => state.subjects
 )
 
+//para seleccionar el usuario
+export const selectAttendance = createSelector(
+    selectUserFeature,
+    (state: user.UserState) => state.attendance
+)
+
