@@ -27,6 +27,7 @@
         "@capacitor/status-bar": "4.1.1",
         "@ionic/angular": "^6.1.9",
         "@ngrx/effects": "^15.4.0",
+        "@ngrx/entity": "^15.4.0",
         "@ngrx/store": "^15.4.0",
         "ionicons": "^6.0.3",
         "ng-circle-progress": "^1.7.1",
