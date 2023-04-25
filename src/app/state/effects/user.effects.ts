@@ -3,12 +3,14 @@ import { Router } from "@angular/router";
 import { Actions, concatLatestFrom, createEffect, ofType} from '@ngrx/effects';
 import { catchError, map, mergeMap, tap, of, switchMap, exhaustMap, Observable, merge, concatMap } from "rxjs";
 import * as AuthActions from "../actions/auth.actions";
-import * as UserActions from "../actions/user.actions"
+import * as UserActions from "../actions/user.actions";
+import * as AttendanceActions from "../actions/attendance.actions";
 import { UserService } from "src/app/services/user.service";
 import { Subject } from "src/app/models/subject.model";
 import { Attendance } from "src/app/models/attendance.interface";
 import { Store } from "@ngrx/store";
 import { UserState } from "../reducers/user.reducer";
+import { AttendanceState } from "../reducers/attendance.reducer";
 import { selectSubjects } from "../app.state";
 
 @Injectable()
@@ -60,19 +62,16 @@ export class UserEffects {
         )
     )
 
-    // getAttendance$ = createEffect(() => 
-    //     this.actions$.pipe(
-    //         ofType(UserActions.getSubjects),
-    //         map((action) => action.subjects),
-    //         mergeMap((subjects, index) => this.userService.getAttendance(
-    //             subjects[index].student_id.toString(), 
-    //             subjects[index].materia_id.toString(),
-    //             this.date.getFullYear()).pipe(
-    //                 switchMap((res: any) => of(
-    //                     UserActions.getAttendance({attendance: res.result})
-    //                 ))
-    //             ) )
-    //     ))
+    getAllAttendances$ = createEffect(() => 
+        this.actions$.pipe(
+            ofType(UserActions.setUser),
+            map(action => action.user.id),
+            exhaustMap((id: number) => this.userService.getAttendance(id.toString()).pipe(
+                switchMap((res: any) => of(
+                    AttendanceActions.loadAttendances({atte: res.result})
+                ))
+            ))
+        ))
 
     constructor(
         private userService: UserService,

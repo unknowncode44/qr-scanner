@@ -2,9 +2,10 @@ import { Input, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subject } from 'src/app/models/subject.model';
-import { selectAttendance, selectSubjects } from 'src/app/state/app.state';
+import { selectUser } from 'src/app/state/app.state';
 import { ActivatedRoute } from '@angular/router';
 import { Attendance } from 'src/app/models/attendance.interface';
+import { UserService } from 'src/app/services/user.service';
 
 
 
@@ -24,6 +25,8 @@ export class SubjectProgressPagePage implements OnInit {
   subjects: Subject[] = []
   attendances: Attendance[] = []
 
+  userId: string = ''
+
   subject_id?: number;
   private sub?: any 
 
@@ -35,37 +38,24 @@ export class SubjectProgressPagePage implements OnInit {
   percentage: number = (this.total_a_clases/this.total_d_clases)*100
   activity: Activity[] = [
     {date: '04/04/2023', hours: '1:25'}, {date: '05/04/2023', hours: '2:00'},{date: '06/04/2023', hours: '1:35'},
-  ]  
+  ]
+  
 
-  constructor(private router: Router, private readonly store: Store, private route: ActivatedRoute) {
-    
-  }
+  constructor(
+    private router: Router, 
+    private readonly store: Store, 
+    private route: ActivatedRoute, 
+    private userService: UserService
+    ) {}
 
   ngOnInit() {
+    this.store.select(selectUser).subscribe(
+      user => this.userId = user?.id.toString()!
+    )
     this.sub = this.route.params.subscribe( params => {
       this.subject_id = +params['id']
       console.warn(this.subject_id);
-      
     })
-    this.store.select(selectSubjects).subscribe(subjets => {
-      for (let i = 0; i < subjets.length; i++) {
-        const e = subjets[i];
-        if(e != null ){
-          this.subjects.push(e)
-        }
-      }
-    })
-    this.store.select(selectAttendance).subscribe( attendance => { 
-      for (let i = 0; i < attendance.length; i++) {
-        const e = attendance[i];
-        if(e?.materia_id === this.subject_id) {
-          this.attendances.push(e!)
-        }
-      }
-      console.warn(this.attendances);
-      
-    })
-    
   }
 
   backToHome(){

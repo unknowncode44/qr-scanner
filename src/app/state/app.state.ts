@@ -1,18 +1,20 @@
 import * as auth from './reducers/auth.reducer'
 import * as user from './reducers/user.reducer'
+import * as atte from './reducers/attendance.reducer'
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 // ESTADO DE LA APLICACION
 export interface AppState {
     authState: auth.AuthState,
     userState: user.UserState,
-
+    atteState: atte.AttendanceState,
 }
 
 
 // SELECTORES
 export const selectAuthFeature = createFeatureSelector<auth.AuthState>('auth')
 export const selectUserFeature = createFeatureSelector<user.UserState>('user')
+export const selectAtteFeature = createFeatureSelector<atte.AttendanceState>('atte')
 
 
 // para seleccionar el token del state
@@ -57,9 +59,10 @@ export const selectSubjects = createSelector(
     (state: user.UserState) => state.subjects
 )
 
-//para seleccionar el usuario
-export const selectAttendance = createSelector(
-    selectUserFeature,
-    (state: user.UserState) => state.attendance
-)
+export const selectAllAttendances = createSelector(
+    selectAtteFeature,
+    atte.selectAllAttendances)
+
+
+
 

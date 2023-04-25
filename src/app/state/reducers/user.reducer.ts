@@ -9,7 +9,7 @@ export interface UserState {
     user        : User | null,
     role        : string | null,
     subjects    : Subject[] | null[]
-    attendance  : any[] | null[]
+
   
 }
 
@@ -18,7 +18,7 @@ export const userInitialState: UserState  = {
     user        : null,
     role        : null,
     subjects    : [],
-    attendance  : [],
+
 }
 
 // USER REDUCER
@@ -27,5 +27,4 @@ export const userReducer = createReducer(
     on(UserActions.setUser,         (state, { user })           : UserState =>({ ...state, user         })),
     on(UserActions.setRole,         (state, { role })           : UserState =>({ ...state, role         })),
     on(UserActions.getSubjects,     (state, { subjects })       : UserState =>({ ...state, subjects     })),
-    on(UserActions.getAttendance,   (state, { attendance })     : UserState =>({ ...state, attendance   }))
 )

@@ -4,10 +4,11 @@ import { User } from '../models/user.interface';
 import { StorageService } from '../services/storage.service';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { selectUser, selectSubjects, selectAttendance } from '../state/app.state';
+import { selectUser, selectSubjects } from '../state/app.state';
 import { UserService } from '../services/user.service';
 import { getAttendance } from '../state/actions/user.actions';
 import { Attendance } from '../models/attendance.interface';
+import { selectAllAttendances } from '../state/app.state';
 
 interface ShowSubject {
   id: number,
@@ -48,20 +49,7 @@ export class DashboardPage implements OnInit {
 
   attendance: Attendance[] = []
 
-  recentActivity = [
-    {
-    subj: "Matematica",
-    time: "01:32"
-    },
-    {
-      subj: "Laboratorio 1",
-      time: "02:32"
-    },
-    {
-      subj: "Ingles 1",
-      time: "00:32"
-    },
-  ]
+  recentActivity = [{subj: '', date: ''}] 
 
 
 
@@ -75,6 +63,22 @@ export class DashboardPage implements OnInit {
     let time = new Date()
     
     this.store.select(selectUser).subscribe(user => {this.user = user!});
+    this.store.select(selectAllAttendances).subscribe(
+      attes => {
+        this.recentActivity = []
+        attes.sort(function(a,b){
+          let str1 = a.attendance_date.split('/').reverse().join('')
+          let str2 = b.attendance_date.split('/').reverse().join('')
+          return str2.localeCompare(str1)
+        })
+        for (let i = 0; i < 3; i++) {
+          const e = attes[i];
+          let act = { subj: e.materia_name, date: e.attendance_date}
+          this.recentActivity.push(act)
+          
+        }
+      }
+    )
     this.store.select(selectSubjects).subscribe(subjects => {
       for (let i = 0; i < subjects.length; i++) {
         const e = subjects[i];

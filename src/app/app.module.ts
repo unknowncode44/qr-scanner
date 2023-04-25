@@ -17,6 +17,7 @@ import { UserEffects } from './state/effects/user.effects';
 import { AuthService } from './services/auth.service';
 import { authReducer } from './state/reducers/auth.reducer';
 import { userReducer } from './state/reducers/user.reducer';
+import { attendanceReducer } from './state/reducers/attendance.reducer';
 
 
 
@@ -27,7 +28,7 @@ import { userReducer } from './state/reducers/user.reducer';
     IonicModule.forRoot(),
     AppRoutingModule, 
     HttpClientModule, 
-    StoreModule.forRoot({auth: authReducer, user: userReducer}), 
+    StoreModule.forRoot({auth: authReducer, user: userReducer, atte: attendanceReducer}), 
     EffectsModule.forRoot([AuthEffects, UserEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode()})
   ],

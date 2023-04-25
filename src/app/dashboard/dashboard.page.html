@@ -41,7 +41,7 @@
             </ion-button>
         </div>
     </div>
-    <div *ngIf="!hideHeader" class="list-cont">
+    <div class="list-cont">
         <h3>Actividad reciente</h3>
         <ion-item lines="none" *ngFor="let activity of recentActivity">
             <ion-grid>
@@ -50,12 +50,8 @@
                     <ion-col size="1">
                         <ion-icon color="light" name="time-outline"></ion-icon>
                     </ion-col>
-                    <ion-col size="3">{{activity.time}}</ion-col>
-                    <ion-col size="2">
-                        <ion-button color="light" fill="clear">
-                            <ion-icon slot="icon-only" name="ellipsis-vertical"></ion-icon>
-                        </ion-button>
-                    </ion-col>
+                    <ion-col size="5">{{activity.date}}</ion-col>
+
                 </ion-row>
             </ion-grid>
         </ion-item>
