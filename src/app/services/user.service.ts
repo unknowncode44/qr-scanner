@@ -41,7 +41,7 @@ export class UserService {
 
   //? get asistencia
   getAttendance(userid: string): Observable<any> {
-    let direction = this.url + 'attendances/'+userid
+    let direction = this.url + 'student/attendance-info/'+userid
     return this.http.get(direction).pipe(catchError(this.handleError))
   }
 

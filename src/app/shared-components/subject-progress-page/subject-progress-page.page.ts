@@ -2,10 +2,11 @@ import { Input, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subject } from 'src/app/models/subject.model';
-import { selectUser } from 'src/app/state/app.state';
+import { selectAllAttendances, selectSubjects, selectUser } from 'src/app/state/app.state';
 import { ActivatedRoute } from '@angular/router';
 import { Attendance } from 'src/app/models/attendance.interface';
 import { UserService } from 'src/app/services/user.service';
+import { getSubjects } from 'src/app/state/actions/user.actions';
 
 
 
@@ -36,9 +37,7 @@ export class SubjectProgressPagePage implements OnInit {
   total_d_clases: number = 10
   total_a_clases: number = 8
   percentage: number = (this.total_a_clases/this.total_d_clases)*100
-  activity: Activity[] = [
-    {date: '04/04/2023', hours: '1:25'}, {date: '05/04/2023', hours: '2:00'},{date: '06/04/2023', hours: '1:35'},
-  ]
+  activity: Activity[] = []
   
 
   constructor(
@@ -51,14 +50,62 @@ export class SubjectProgressPagePage implements OnInit {
   ngOnInit() {
     this.store.select(selectUser).subscribe(
       user => this.userId = user?.id.toString()!
-    )
+    ).unsubscribe()
+
     this.sub = this.route.params.subscribe( params => {
       this.subject_id = +params['id']
-      console.warn(this.subject_id);
-    })
+    }).unsubscribe()
+    
+    this.store.select(selectAllAttendances).subscribe(
+      atte => {
+        for (let i = 0; i < atte.length; i++) {
+          const e = atte[i];
+          if(e.materia_id === this.subject_id){
+            this.attendances.push(e)
+            let act = {date: e.attendance_date, hours: "2:00"}
+            if(this.activity.length <= 3){
+              this.activity.push(act)
+            }
+          }
+        }
+
+      }
+    ).unsubscribe()
+    
+    if(this.attendances.length > 0) {
+      let subj = this.attendances[0];
+      this.subject = subj.materia_name;
+      this.total_clases = subj.total_classes;
+      this.total_d_clases = subj.classes_quantity;
+      this.total_a_clases = this.attendances.length
+      this.percentage = (this.total_a_clases/this.total_d_clases)*100
+    }
+    else {
+      this.store.select(selectSubjects).subscribe(
+        sjs => {
+          for (let i = 0; i < sjs.length; i++) {
+            const e = sjs[i];
+            if(this.subject_id === e?.materia_id){
+              this.subject = e!.materia_name
+              // TODO: agregar clases totales en subjects
+              this.total_clases = 20;
+              this.total_a_clases = 0;
+              this.total_d_clases = 0;
+              this.percentage = (this.total_a_clases/this.total_d_clases)*100
+            }
+            
+          }
+        }
+      ).unsubscribe()
+    }
+    
+
+
+    
   }
 
   backToHome(){
+    this.store.select(selectSubjects).subscribe()
     this.router.navigateByUrl('/dashboard')
   }
 

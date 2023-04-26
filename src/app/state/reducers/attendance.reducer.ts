@@ -10,7 +10,7 @@ export interface AttendanceState extends EntityState<Attendance> {
 
 
 export function selectAttendanceId(a: Attendance): string{
-    return a.id.toString()
+    return a.attendance_id.toString()
 }
 
 export function sortAttendanceByName(a: Attendance, b: Attendance): number {

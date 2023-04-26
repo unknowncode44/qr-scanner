@@ -1,16 +1,31 @@
 export interface Attendance {
-    actual_year     : string,
-    attendance_date : string,
-    class_day       : string,
-    class_schedule  : string,
-    classes_quantity: number,
-    cuil            : string
-    id              : number,
-    last_name       : string
-    materia_id      : number,
-    materia_name    : string
-    professor_id    : number,
-    professor_name  : string
-    schedule_id     : number,
-    user_name       : string
+    actual_year         : string,
+    attendance_date     : string,
+    attendance_id       : number,
+    career_id           : number,
+    career_name         : string,
+    classes_quantity    : number,
+    materia_id          : number,
+    materia_name        : string,
+    professor           : string,
+    professor_id        : number,
+    professor_last_name : string,
+    student_id          : number,
+    total_classes       : number
 }
+
+/*
+actual_year         : string,
+attendance_date     : string,
+attendance_id       : number,
+career_id           : number,
+career_name         : string,
+classes_quantity    : number,
+materia_id          : number,
+materia_name        : string,
+professor           : string,
+professor_id        : number,
+professor_last_name : string,
+student_id          : number,
+total_classes       : number
+*/
