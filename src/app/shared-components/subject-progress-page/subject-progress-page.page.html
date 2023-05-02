@@ -52,9 +52,16 @@
         </ion-grid>
     </div>
     <div class="activity-container">
-        <ion-col size="12">
-            Ultima Actividad
-        </ion-col>
+        <ion-row>
+            <ion-col size="8">
+                <p>Ultima Actividad</p>
+            </ion-col>
+            <ion-col size="4">
+                <ion-button (click)="seeAll()" color="dark" fill="clear" shape="round">
+                    Ver todo
+                </ion-button>
+            </ion-col>
+        </ion-row>
         <div class="inside-a-c">
             <ion-list class="ion-no-border">
                 <ion-item *ngFor="let act of activity" class="ion-no-border">

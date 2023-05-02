@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-teacher-home',
@@ -52,14 +53,24 @@ export class TeacherHomePage implements OnInit {
       subject: 'Programacion 2'
     },
   ]
+  
+  isDesktop: boolean = false
 
-  constructor() { }
+  constructor(public platform: Platform) { }
+
 
   slidesOptions = {
     slidesPerView: 1.3,
   }
 
   ngOnInit() {
+    console.log(this.platform.width());
+    
+    if(this.platform.width() > 500){
+      this.isDesktop = true
+    }
+    
+      
   }
 
 }

@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -18,20 +19,28 @@ import { AuthService } from './services/auth.service';
 import { authReducer } from './state/reducers/auth.reducer';
 import { userReducer } from './state/reducers/user.reducer';
 import { attendanceReducer } from './state/reducers/attendance.reducer';
+import { FilterPipe } from 'src/app/helpers/filter-pipe';
+import { CommonModule } from '@angular/common';
+import { subjectReducer } from './state/reducers/subject.reducer';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    BrowserModule, 
+    BrowserModule,
+    BrowserAnimationsModule, 
     IonicModule.forRoot(),
     AppRoutingModule, 
     HttpClientModule, 
-    StoreModule.forRoot({auth: authReducer, user: userReducer, atte: attendanceReducer}), 
+    StoreModule.forRoot({auth: authReducer, user: userReducer, atte: attendanceReducer, sbjs: subjectReducer}), 
     EffectsModule.forRoot([AuthEffects, UserEffects]),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode()})
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode()}),
+    CommonModule
   ],
+
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
     
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
@@ -40,5 +49,6 @@ import { attendanceReducer } from './state/reducers/attendance.reducer';
     AuthService,
   ],
   bootstrap: [AppComponent],
+  exports: []
 })
 export class AppModule {}

@@ -1,0 +1,73 @@
+ion-content {
+    --background: #76cea2;
+    width: 100%;
+    .board {
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        border-radius: 15px;
+        background: #ffffff90;
+        height: auto;
+        min-height: 100%;
+        position: relative;
+        ion-grid {
+            width: 100%;
+            ion-row {
+                min-width: 100%;
+            }
+            ion-col {
+                max-height: 120px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                ion-card {
+                    padding: 0px;
+                    width: 100%;
+                    min-height: 110px;
+                    ion-card-header {
+                        padding: 8px 16px;
+                    }
+                    ion-grid {
+                        padding: 0;
+                        ion-col {
+                            margin: 8px 0px;
+                            display: flex;
+                            flex-direction: column;
+                            min-height: 50px;
+                            justify-content: center;
+                            align-items: center;
+                            padding: 0;
+                            h2 {
+                                width: 100%;
+                                padding: 0;
+                                margin: auto 0px;
+                                font-weight: 300;
+                                text-align: start;
+                                font-size: 20px;
+                            }
+                            ion-icon {
+                                height: 50px;
+                            }
+                        }
+                    }
+                }
+                ion-card:hover {
+                    background: #ffffffbe;
+                    transform: scale(1.01);
+                }
+            }
+        }
+    }
+}
+
+@keyframes MyAnimation {
+    0% {
+        padding-left: 50px;
+    }
+    100% {
+        padding-left: 0px;
+    }
+}
+
+.my-animation {
+    animation: MyAnimation 0.5s;
+}

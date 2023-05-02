@@ -22,6 +22,11 @@ export const getSubjects = createAction(
     props<{ subjects: Subject[] }>()
 );
 
+// quitar las materias del state
+export const removeSubjects = createAction(
+    '[User] Remove Subjects',
+)
+
 //para obtener la asistencia
 export const getAttendance = createAction(
     '[User] Get Attendance',

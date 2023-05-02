@@ -1,41 +1,99 @@
-.slides {
-    background: rgba(88, 164, 127, 0.9);
-    padding: 4px 5px 10px 5px;
-    border-radius: 0 0 0px 20px;
-    div {
-        h4 {
-            color: #ffff;
-            font-weight: 400;
-            margin: 4px 8px 0px 8px;
+    .slides {
+        background: rgba(88, 164, 127, 0.9);
+        padding: 4px 5px 4px 5px;
+        border-radius: 0 0 0px 20px;
+        div {
+            h4 {
+                color: #ffff;
+                font-weight: 400;
+                margin: 4px 8px 0px 8px;
+            }
+        }
+        swiper-slide {
+            width: 70%;
+            margin: 0px 8px;
+        }
+        ion-card {
+            width: 100%;
+            box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 1);
+            .main {
+                width: 50px;
+                height: 50px;
+                border-radius: 50px;
+                background: #ffff;
+                box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                img {
+                    width: 30px;
+                }
+            }
+            ion-card-content {
+                ion-card-title {
+                    font-weight: 500;
+                    font-size: 20px;
+                }
+                ion-card-subtitle {
+                    font-weight: 500;
+                    font-size: 14px;
+                }
+            }
+        }
+        // desktop styles
+        .desktop-header {
+            padding: 0px 32px;
+            h2 {
+                font-size: 32px;
+                font-weight: 400;
+                color: #fff;
+                margin-bottom: 0;
+            }
+            ion-card {
+                width: 100%;
+                height: 180px;
+                box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+                border-radius: 14px;
+                background: rgba(255, 255, 255, 1);
+                ion-card-header {
+                    padding: 8 16px;
+                    ion-card-title {
+                        margin-bottom: 4px;
+                    }
+                }
+                .main {
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50px;
+                    background: #ffff;
+                    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    img {
+                        width: 25px;
+                    }
+                }
+                ion-card-content {
+                    ion-card-title {
+                        font-weight: 500;
+                        font-size: 20px;
+                    }
+                    ion-card-subtitle {
+                        font-weight: 500;
+                        font-size: 14px;
+                    }
+                }
+            }
+            ion-card:hover {
+                transform: scale(1.02);
+                background: #ffffff80;
+            }
         }
     }
-    ion-card {
-        width: 100%;
-        box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-        border-radius: 14px;
-        background: rgba(255, 255, 255, 1);
-        .main {
-            width: 50px;
-            height: 50px;
-            border-radius: 50px;
-            background: #ffff;
-            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            img {
-                width: 30px;
-            }
-        }
-        ion-card-content {
-            ion-card-title {
-                font-weight: 500;
-                font-size: 20px;
-            }
-            ion-card-subtitle {
-                font-weight: 500;
-                font-size: 14px;
-            }
-        }
+    
+    .content-container {
+        background-color: #69bb7b34;
     }
-}

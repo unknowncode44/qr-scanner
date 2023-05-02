@@ -8,13 +8,12 @@ export interface AttendanceState extends EntityState<Attendance> {
 }
 
 
-
 export function selectAttendanceId(a: Attendance): string{
     return a.attendance_id.toString()
 }
 
 export function sortAttendanceByName(a: Attendance, b: Attendance): number {
-    return a.attendance_date.localeCompare(b.materia_name)
+    return a.attendance_date.localeCompare(b.attendance_date)
 }
 
 export const attendanceAdapter: EntityAdapter<Attendance> = createEntityAdapter<Attendance>({

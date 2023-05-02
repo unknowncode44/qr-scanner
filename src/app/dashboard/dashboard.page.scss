@@ -31,8 +31,12 @@ ion-content {
     --background: linear-gradient( 90deg, rgba(88, 164, 127, 1) 0%, rgba(118, 206, 162, 1) 35%, rgba(118, 206, 162, 1) 100%);
     .slides {
         background: #f1f5f8;
-        padding: 4px 10px 20px 10px;
+        padding: 4px 16px 20px 16px;
         border-radius: 0 0 28px 28px;
+        swiper-slide {
+            width: 60%;
+            margin: 0px 8px;
+        }
         .btn-container {
             min-width: 100%;
             padding: 0px 24px;
@@ -76,6 +80,23 @@ ion-content {
         h3 {
             font-weight: 300;
             font-size: 16px;
+        }
+        ion-row {
+            margin: 4px 0px;
+            max-height: 30px;
+            ion-col {
+                display: flex;
+                justify-content: start;
+                align-content: start;
+                text-align: start;
+                p {
+                    margin: 4px 0px;
+                }
+                ion-button {
+                    font-weight: 300;
+                    max-height: 20px;
+                }
+            }
         }
         ion-item {
             --background: rgba(255, 255, 255, .2);

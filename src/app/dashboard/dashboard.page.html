@@ -19,8 +19,8 @@
 
 <ion-content>
     <div class="slides ion-margin-bottom">
-        <ion-slides *ngIf="!hideHeader" [options]="slidesOptions">
-            <ion-slide *ngFor="let subject of subjects">
+        <swiper-container [modules]="swiperModules" *ngIf="!hideHeader" [slidesPerView]="1.3" [loop]="true">
+            <swiper-slide *ngFor="let subject of subjects">
                 <ion-card button (click)="seeProgress(subject.id)">
                     <ion-card-header>
                         <div class="main">
@@ -29,12 +29,12 @@
                     </ion-card-header>
                     <ion-card-content class="ion-text-left">
                         <ion-card-title class="ion-margin-bottom">{{subject.title}}</ion-card-title>
-                        <ion-card-subtitle class="ion-text-right">{{subject.percentage}}%</ion-card-subtitle>
-                        <ion-progress-bar value="{{subject.percentage}}" color="custom"></ion-progress-bar>
+                        <ion-card-subtitle class="ion-text-left">{{subject.percentage}}%</ion-card-subtitle>
+                        <ion-progress-bar [value]="subject.value" color="custom"></ion-progress-bar>
                     </ion-card-content>
                 </ion-card>
-            </ion-slide>
-        </ion-slides>
+            </swiper-slide>
+        </swiper-container>
         <div class="btn-container">
             <ion-button expand="block" size="large" color="custom">Escanear
                 <ion-icon name="qr-code-outline" slot="end"></ion-icon>
@@ -42,7 +42,16 @@
         </div>
     </div>
     <div class="list-cont">
-        <h3>Actividad reciente</h3>
+        <ion-row>
+            <ion-col size="8">
+                <p>Ultima Actividad</p>
+            </ion-col>
+            <ion-col size="4">
+                <ion-button (click)="seeAll()" color="light" fill="clear" shape="round">
+                    Ver todo
+                </ion-button>
+            </ion-col>
+        </ion-row>
         <ion-item lines="none" *ngFor="let activity of recentActivity">
             <ion-grid>
                 <ion-row class="ion-align-items-center">

@@ -83,7 +83,12 @@ export class TeacherDashboardPage implements OnInit {
 
   ngOnInit() {
     this.storage.getUser('user').then(user => {this.user = user})
-    this.router.navigateByUrl('/teacher-dashboard/teacher-home')
+    if(this.user.role === 'TEACHER'){
+      this.router.navigateByUrl('/teacher-dashboard/teacher-home')
+    }
+    else {
+      this.router.navigateByUrl('/teacher-dashboard/admin-home')
+    }
   }
 
   async openMenu() {

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, Subject, catchError, tap, throwError } from 'rxjs';
 import { User } from '../models/user.interface';
+import { SubjectExtended } from '../models/subject.model';
 
 @Injectable({
   providedIn: 'root'
@@ -39,11 +40,30 @@ export class UserService {
     return this.http.get(direction).pipe(catchError(this.handleError))
   }
 
+  //? get materia additional info
+  getSubjectsAdditional(name: string): Observable<any> {
+    let direction = this.url + 'materia/parameter/'+name
+    return this.http.get(direction).pipe(catchError(this.handleError))
+  }
+
+  // getFinalSubjects(id: string): SubjectExtended[]{
+  //   let subjects: SubjectExtended[]
+  //   this.getSubjects(id).subscribe((res) => {
+  //     for (let index = 0; index < array.length; index++) {
+  //       const element = array[index];
+        
+  //     }
+  //   })
+  //   return subjects
+  // }
+
   //? get asistencia
   getAttendance(userid: string): Observable<any> {
     let direction = this.url + 'student/attendance-info/'+userid
     return this.http.get(direction).pipe(catchError(this.handleError))
   }
+
+  //api/materia/parameter/:parameter
 
   //! Obtener un unico usuario
   getUser(id: string): Observable<any> {

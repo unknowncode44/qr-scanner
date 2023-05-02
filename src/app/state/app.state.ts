@@ -1,6 +1,7 @@
 import * as auth from './reducers/auth.reducer'
 import * as user from './reducers/user.reducer'
 import * as atte from './reducers/attendance.reducer'
+import * as sbjs from './reducers/subject.reducer'
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 // ESTADO DE LA APLICACION
@@ -8,6 +9,7 @@ export interface AppState {
     authState: auth.AuthState,
     userState: user.UserState,
     atteState: atte.AttendanceState,
+    sbjsState: sbjs.SubjectState
 }
 
 
@@ -15,6 +17,7 @@ export interface AppState {
 export const selectAuthFeature = createFeatureSelector<auth.AuthState>('auth')
 export const selectUserFeature = createFeatureSelector<user.UserState>('user')
 export const selectAtteFeature = createFeatureSelector<atte.AttendanceState>('atte')
+export const selectSbjsFeature = createFeatureSelector<sbjs.SubjectState>('sbjs')
 
 
 // para seleccionar el token del state
@@ -62,6 +65,11 @@ export const selectSubjects = createSelector(
 export const selectAllAttendances = createSelector(
     selectAtteFeature,
     atte.selectAllAttendances)
+
+export const selectAllSubjects = createSelector(
+    selectSbjsFeature,
+    sbjs.selectAllSubjects
+)
 
 
 

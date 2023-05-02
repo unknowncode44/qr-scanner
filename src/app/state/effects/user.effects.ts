@@ -1,22 +1,27 @@
-import { Injectable } from "@angular/core";
-import { Router } from "@angular/router";
-import { Actions, concatLatestFrom, createEffect, ofType} from '@ngrx/effects';
-import { catchError, map, mergeMap, tap, of, switchMap, exhaustMap, Observable, merge, concatMap } from "rxjs";
-import * as AuthActions from "../actions/auth.actions";
-import * as UserActions from "../actions/user.actions";
-import * as AttendanceActions from "../actions/attendance.actions";
-import { UserService } from "src/app/services/user.service";
-import { Subject } from "src/app/models/subject.model";
-import { Attendance } from "src/app/models/attendance.interface";
-import { Store } from "@ngrx/store";
+import { Injectable }   from "@angular/core";
+import { Router }       from "@angular/router";
+
+// ngrx & rxjs
+import { Actions, concatLatestFrom, createEffect, ofType}   from '@ngrx/effects';
+import { map, tap, of, switchMap, exhaustMap }              from "rxjs";
+import { Store }                                            from "@ngrx/store";
+
+// app state
 import { UserState } from "../reducers/user.reducer";
-import { AttendanceState } from "../reducers/attendance.reducer";
-import { selectSubjects } from "../app.state";
+
+// state actions
+import * as AuthActions         from "../actions/auth.actions";
+import * as UserActions         from "../actions/user.actions";
+import * as AttendanceActions   from "../actions/attendance.actions";
+import * as SubjectActions      from "../actions/subject.actions";
+
+// services
+import { UserService } from "src/app/services/user.service";
+import { SubjectExtended } from "src/app/models/subject.model";
+
 
 @Injectable()
 export class UserEffects {
-
-    
 
     loginSuccess$ = createEffect(() =>
     this.actions$.pipe(
@@ -33,7 +38,7 @@ export class UserEffects {
         ofType(UserActions.setRole),
         tap((res) => {
             setTimeout(() => {
-                if((res.role == 'TEACHER')||(res.role == 'ADMIN')){
+                if((res.role == 'TEACHER')||(res.role == 'ADMIN')||(res.role == 'SUSER')){
                     this.router.navigateByUrl('/teacher-dashboard');
                     AuthActions.loading({loading: false});
                 }
@@ -41,7 +46,7 @@ export class UserEffects {
                     this.router.navigateByUrl('/dashboard');
                     AuthActions.loading({loading: false});
                 }
-            }, 500);
+            }, 5);
             
         }),
         switchMap((t) => of(
@@ -49,7 +54,8 @@ export class UserEffects {
         ))
 
     ))
-
+    
+    //! quitar
     getSubjects$ = createEffect(() => 
         this.actions$.pipe(
             ofType(UserActions.setUser),
@@ -61,6 +67,19 @@ export class UserEffects {
             ))
         )
     )
+    //!
+
+    getExtendedSubjects$ = createEffect(() => 
+    this.actions$.pipe(
+        ofType(UserActions.setUser),
+        map((action) => action.user.id),
+        exhaustMap((id: number) => this.userService.getSubjects(id.toString()).pipe(
+            switchMap((res: any) => of(
+                SubjectActions.loadSubjects({sbj: res.result})
+            ))
+        ))
+        
+    ))
 
     getAllAttendances$ = createEffect(() => 
         this.actions$.pipe(

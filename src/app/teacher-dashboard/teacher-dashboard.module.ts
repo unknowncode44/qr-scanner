@@ -6,7 +6,6 @@ import { TeacherDashboardPageRoutingModule } from './teacher-dashboard-routing.m
 import { RolePermissionsDirective } from '../directive/role.permissions.directive';
 import { TeacherDashboardPage } from './teacher-dashboard.page';
 import { MenuComponent } from '../shared-components/menu/menu.component';
-import { SubjectProgressComponent } from '../shared-components/subject-progress/subject-progress.component';
 
 @NgModule({
   imports: [
@@ -19,7 +18,6 @@ import { SubjectProgressComponent } from '../shared-components/subject-progress/
     TeacherDashboardPage, 
     RolePermissionsDirective, 
     MenuComponent, 
-    
   ]
 })
 export class TeacherDashboardPageModule {}

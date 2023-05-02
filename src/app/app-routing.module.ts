@@ -28,6 +28,14 @@ const routes: Routes = [
   {
     path: 'subject-progress-page',
     loadChildren: () => import('./shared-components/subject-progress-page/subject-progress-page.module').then( m => m.SubjectProgressPagePageModule)
+  },
+  {
+    path: 'admin-home',
+    loadChildren: () => import('./shared-components/admin-home/admin-home.module').then( m => m.AdminHomePageModule)
+  },
+  {
+    path: 'seeall',
+    loadChildren: () => import('./shared-components/seeall/seeall.module').then( m => m.SeeallPageModule)
   }
 
 ];

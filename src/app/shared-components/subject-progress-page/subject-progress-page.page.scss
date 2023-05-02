@@ -94,16 +94,30 @@ ion-content {
         }
     }
     .activity-container {
-        margin: 4px 8px;
+        margin: 0px 8px;
         max-height: 100%;
         position: relative;
         background: #fff;
         border-radius: 20px;
         overflow: auto;
         padding: 16px 4px;
+        ion-row {
+            max-height: 30px;
+        }
         ion-col {
             color: #808080;
             font-weight: 300;
+            display: flex;
+            justify-content: start;
+            align-content: start;
+            text-align: start;
+            p {
+                margin: 4px 0px;
+            }
+            ion-button {
+                font-weight: 300;
+                max-height: 20px;
+            }
         }
         .inside-a-c {
             min-height: 218px;

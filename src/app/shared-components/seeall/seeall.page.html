@@ -1,0 +1,30 @@
+<ion-header class="ion-no-border" color="custom">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-button (click)="backToHome()">
+                <ion-icon size="large" slot="start" name="arrow-back" color="light"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title color="light">{{activityTitle}}</ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="filter()">
+                <ion-icon slot="end" name="options-outline" color="light"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" color="custom">
+    <br>
+    <ion-item lines="none" *ngFor="let att of attArray">
+        <ion-grid>
+            <ion-row class="ion-align-items-center">
+                <ion-col size="6">{{att.materia_name}}</ion-col>
+                <ion-col size="1">
+                    <ion-icon color="light" name="calendar-number-outline"></ion-icon>
+                </ion-col>
+                <ion-col size="5">{{att.attendance_date}}</ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-item>
+</ion-content>

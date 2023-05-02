@@ -1,11 +1,15 @@
 # Specifies intentionally untracked files to ignore when using Git
 # http://git-scm.com/docs/gitignore
 
+
 *~
 *.sw[mnpcod]
 .tmp
 *.tmp
 *.tmp.*
+.sh
+*.sh
+*.sh.*
 UserInterfaceState.xcuserstate
 $RECYCLE.BIN/
 
@@ -66,3 +70,7 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+#scripts
+.nvm_change_version.sh
+.run_server.sh

@@ -16,6 +16,11 @@ const routes: Routes = [
         path: 'teacher-home',
         loadChildren: () => import('./teacher-home/teacher-home.module').then( m => m.TeacherHomePageModule)
       },
+      {
+        path: 'admin-home',
+        loadChildren: () => import('../shared-components/admin-home/admin-home.module').then( m => m.AdminHomePageModule)
+      },
+      
       
     ]
   },

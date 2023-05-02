@@ -1,4 +1,4 @@
-import { Input, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subject } from 'src/app/models/subject.model';
@@ -6,7 +6,7 @@ import { selectAllAttendances, selectSubjects, selectUser } from 'src/app/state/
 import { ActivatedRoute } from '@angular/router';
 import { Attendance } from 'src/app/models/attendance.interface';
 import { UserService } from 'src/app/services/user.service';
-import { getSubjects } from 'src/app/state/actions/user.actions';
+
 
 
 
@@ -102,6 +102,12 @@ export class SubjectProgressPagePage implements OnInit {
 
 
     
+  }
+
+  seeAll(){
+    console.log(this.subject_id);
+    
+    this.router.navigate(['/subject-progress-page/seeall', this.subject_id])
   }
 
   backToHome(){

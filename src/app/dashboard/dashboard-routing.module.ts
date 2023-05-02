@@ -12,6 +12,10 @@ const routes: Routes = [
     path: 'subject-progress-page/:id',
     loadChildren: () => import('../shared-components/subject-progress-page/subject-progress-page.module').then( m => m.SubjectProgressPagePageModule),
   },
+  {
+    path: 'seeall',
+    loadChildren: () => import('../shared-components/seeall/seeall.module').then( m => m.SeeallPageModule),
+  },
 ];
 
 @NgModule({

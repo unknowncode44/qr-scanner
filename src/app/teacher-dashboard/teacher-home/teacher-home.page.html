@@ -1,10 +1,34 @@
 <ion-content>
     <div class="slides ion-margin-bottom">
-        <div>
-            <h4>Mis Materias</h4>
+        <!-- Desktop bar -->
+        <div class="desktop-header" *ngIf="isDesktop">
+            <h2>Home</h2>
+            <ion-grid fixed>
+                <ion-row>
+                    <ion-col size="3" *ngFor="let subject of mySubjects">
+                        <ion-card>
+                            <ion-card-header>
+                                <div class="main">
+                                    <img src="{{subject.icon}}" alt="">
+                                </div>
+                            </ion-card-header>
+                            <ion-card-content>
+                                <ion-card-title class="ion-margin-bottom">{{subject.title}}</ion-card-title>
+                                <ion-card-subtitle class="ion-text-left">{{subject.carrer}}</ion-card-subtitle>
+                                <ion-badge class="ion-text-right" color="{{subject.color}}">{{subject.curso}}</ion-badge>
+                            </ion-card-content>
+                        </ion-card>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
         </div>
-        <ion-slides [options]="slidesOptions">
-            <ion-slide *ngFor="let subject of mySubjects">
+        <!-- /Desktop bar -->
+        <div *ngIf="!isDesktop">
+            <h4>Mis Materias</h4>
+
+        </div>
+        <swiper-container *ngIf="!isDesktop" class="swiper" [slidesPerView]="1.3" [loop]="true">
+            <swiper-slide *ngFor="let subject of mySubjects">
                 <ion-card>
                     <ion-card-header>
                         <div class="main">
@@ -18,7 +42,18 @@
 
                     </ion-card-content>
                 </ion-card>
-            </ion-slide>
-        </ion-slides>
+            </swiper-slide>
+        </swiper-container>
+    </div>
+    <!-- desktop content -->
+    <div class="content-container">
+        <ion-grid fixed>
+            <ion-row>
+                <ion-col size="6" class="ion-text-center">
+                    <h3>Nueva Clase</h3>
+                </ion-col>
+                <ion-col size="6"></ion-col>
+            </ion-row>
+        </ion-grid>
     </div>
 </ion-content>

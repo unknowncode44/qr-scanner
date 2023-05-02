@@ -1,21 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../services/auth.service';
 import { User } from '../models/user.interface';
-import { StorageService } from '../services/storage.service';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { selectUser, selectSubjects } from '../state/app.state';
+import { selectUser, selectSubjects, selectAllSubjects } from '../state/app.state';
 import { UserService } from '../services/user.service';
-import { getAttendance } from '../state/actions/user.actions';
 import { Attendance } from '../models/attendance.interface';
 import { selectAllAttendances } from '../state/app.state';
+import { IonicSlides } from '@ionic/angular';
+import { SubjectExtended } from '../models/subject.model';
+import { iconsArray } from '../helpers/icons-url';
 
 interface ShowSubject {
   id: number,
   title: string,
   total_hours: number,
   img: string,
-  value?: string,
+  value?: number,
   percentage?: string
 }
 
@@ -25,6 +25,8 @@ interface ShowSubject {
   styleUrls: ['./dashboard.page.scss'],
 })
 export class DashboardPage implements OnInit {
+
+  swiperModules = [IonicSlides]
 
   date = new Date()
   token!: string
@@ -47,6 +49,8 @@ export class DashboardPage implements OnInit {
 
   subjects: ShowSubject[] = []
 
+  sbjs: SubjectExtended[] = []
+
   attendance: Attendance[] = []
 
   recentActivity = [{subj: '', date: ''}] 
@@ -59,7 +63,7 @@ export class DashboardPage implements OnInit {
     ) { }
 
   ngOnInit() {
-    this.store.select(selectUser).subscribe(user => {this.user = user!}).unsubscribe();
+    this.store.select(selectUser).subscribe(user => {this.user = user!});
     this.store.select(selectAllAttendances).subscribe(
       attes => {
         this.recentActivity = []
@@ -86,39 +90,22 @@ export class DashboardPage implements OnInit {
         }
       }
     )
-    this.store.select(selectSubjects).subscribe(subjects => {
-      let matchAtt = []
-      for (let i = 0; i < subjects.length; i++) {
-        const e = subjects[i];
-        let total_classes: number = 0;
-        let total_d_clases: number = 0;
-        for (let i = 0; i < this.attendance.length; i++) {
-          const f = this.attendance[i];
-          if(f.materia_id === e?.materia_id){
-            matchAtt.push(f)
-            total_d_clases = f.classes_quantity;
-            total_classes = f.total_classes
+    this.store.select(selectAllSubjects).subscribe((sbj) => {
+      this.sbjs = sbj;
+        for (let i = 0; i < this.sbjs.length; i++) {
+          const e = this.sbjs[i];
+          let mat = {
+            id: e.materia_id,
+            title: e.materia_name,
+            total_hours: e.total_classes,
+            img: this.getLogo(e.materia_name),
+            value: (e.total_classes/e.classes_quantity)/100,
+            percentage: ((e.total_classes/e.classes_quantity).toFixed(0)).toString()
           }
-
+          this.subjects.push(mat)
         }
-        let perc = '0'
-        if(matchAtt.length > 0) {
-          perc = ((total_d_clases!/total_classes!)*100).toString()
-        }
-        else {
-          perc = (0).toString()
-        } 
-        let mat = {
-          id: e!.materia_id,
-          title: e!.materia_name,
-          total_hours:150,
-          img: "../../assets/images/code.png",
-          percentage: perc
-        }
-        this.subjects.push(mat)
       }
-
-    })
+    )
   }
 
   slidesOptions = {
@@ -132,6 +119,25 @@ export class DashboardPage implements OnInit {
 
   seeProgressGoBack() {
     this.router.navigateByUrl('/dashboard')
+  }
+
+  seeAll() {
+    this.router.navigateByUrl('/seeall')
+  }
+
+  getLogo(materia_name: string) : string{
+    switch (materia_name) {
+      case "Matematica I" || "Matematica II" || "Matematica III":
+        return '../../assets/images/maths.png'
+      case "Ingles I" || "Ingles II" || "Ingles III":  
+        return '../../assets/images/language.png'
+      case "Laboratorio I" || "Laboratorio II" || "Laboratorio III":  
+        return '../../assets/images/tubes.png'  
+      case "Etica" || "Innovacion" || "Gestion de Proyectos":
+        return '../../assets/images/balance.png'
+      default:
+        return '../../assets/images/code.png'
+    }
   }
 
 
